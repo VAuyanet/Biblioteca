@@ -681,23 +681,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\VAuyanet\\.nuget\\packages\\": {},
+    "C:\\Users\\Pol\\.nuget\\packages\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "Z:\\GitHubProjects\\Biblioteca\\Project\\Biblioteca\\Model\\Model.csproj",
+      "projectUniqueName": "C:\\Users\\Pol\\Dropbox\\Pol\\DAM_2\\M15_Dual\\Biblioteca\\Project\\Biblioteca\\Model\\Model.csproj",
       "projectName": "Model",
-      "projectPath": "Z:\\GitHubProjects\\Biblioteca\\Project\\Biblioteca\\Model\\Model.csproj",
-      "packagesPath": "C:\\Users\\VAuyanet\\.nuget\\packages\\",
-      "outputPath": "Z:\\GitHubProjects\\Biblioteca\\Project\\Biblioteca\\Model\\obj\\",
+      "projectPath": "C:\\Users\\Pol\\Dropbox\\Pol\\DAM_2\\M15_Dual\\Biblioteca\\Project\\Biblioteca\\Model\\Model.csproj",
+      "packagesPath": "C:\\Users\\Pol\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Pol\\Dropbox\\Pol\\DAM_2\\M15_Dual\\Biblioteca\\Project\\Biblioteca\\Model\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\VAuyanet\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Pol\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
