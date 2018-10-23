@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 10/23/2018 17:52:14
+-- Date Created: 10/23/2018 20:53:10
 -- Generated from EDMX file: Z:\GitHubProjects\Biblioteca\Project\Base_de_dades\Base_de_dades\Model1.edmx
 -- --------------------------------------------------
 
@@ -20,17 +20,23 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_SociPrestec]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Prestec] DROP CONSTRAINT [FK_SociPrestec];
 GO
-IF OBJECT_ID(N'[dbo].[FK_SancióPrestec]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Sanció] DROP CONSTRAINT [FK_SancióPrestec];
+IF OBJECT_ID(N'[dbo].[FK_CopiaPrestec]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Prestec] DROP CONSTRAINT [FK_CopiaPrestec];
 GO
 IF OBJECT_ID(N'[dbo].[FK_LlibreCopia]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Copia] DROP CONSTRAINT [FK_LlibreCopia];
 GO
 IF OBJECT_ID(N'[dbo].[FK_LlibreLlistatEspera]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Llibre] DROP CONSTRAINT [FK_LlibreLlistatEspera];
+    ALTER TABLE [dbo].[LlistatEspera] DROP CONSTRAINT [FK_LlibreLlistatEspera];
 GO
-IF OBJECT_ID(N'[dbo].[FK_CopiaPrestec]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Copia] DROP CONSTRAINT [FK_CopiaPrestec];
+IF OBJECT_ID(N'[dbo].[FK_AutorLlibre_Autor]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[AutorLlibre] DROP CONSTRAINT [FK_AutorLlibre_Autor];
+GO
+IF OBJECT_ID(N'[dbo].[FK_AutorLlibre_Llibre]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[AutorLlibre] DROP CONSTRAINT [FK_AutorLlibre_Llibre];
+GO
+IF OBJECT_ID(N'[dbo].[FK_PrestecSanció]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Sanció] DROP CONSTRAINT [FK_PrestecSanció];
 GO
 
 -- --------------------------------------------------
@@ -64,6 +70,9 @@ GO
 IF OBJECT_ID(N'[dbo].[Autor]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Autor];
 GO
+IF OBJECT_ID(N'[dbo].[AutorLlibre]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[AutorLlibre];
+GO
 
 -- --------------------------------------------------
 -- Creating all tables
@@ -71,25 +80,25 @@ GO
 
 -- Creating table 'Llibre'
 CREATE TABLE [dbo].[Llibre] (
-    [ISBN] int IDENTITY(1,1) NOT NULL,
+    [ISBN] nvarchar(20)  NOT NULL,
     [titol] nvarchar(max)  NOT NULL,
-    [numPagines] smallint  NOT NULL,
+    [numPagines] int  NOT NULL,
     [disponible] bit  NOT NULL,
     [genere] nvarchar(max)  NOT NULL,
     [editorial] nvarchar(max)  NOT NULL,
-    [dataIntroduccio] nvarchar(max)  NOT NULL,
-    [dataBaixa] nvarchar(max)  NOT NULL,
-    [dataModificacio] nvarchar(max)  NOT NULL
+    [dataIntroduccio] datetime  NOT NULL,
+    [dataModificacio] datetime  NOT NULL,
+    [dataBaixa] datetime  NULL
 );
 GO
 
 -- Creating table 'Copia'
 CREATE TABLE [dbo].[Copia] (
     [Id] int IDENTITY(1,1) NOT NULL,
-    [dataModificacio] nvarchar(max)  NOT NULL,
-    [dataBaixa] nvarchar(max)  NOT NULL,
-    [dataIntroduccio] nvarchar(max)  NOT NULL,
-    [Llibre_ISBN] int  NOT NULL
+    [dataModificacio] datetime  NOT NULL,
+    [dataIntroduccio] datetime  NOT NULL,
+    [dataBaixa] datetime  NULL,
+    [Llibre_ISBN] nvarchar(20)  NOT NULL
 );
 GO
 
@@ -98,18 +107,18 @@ CREATE TABLE [dbo].[Bilbiotecari] (
     [Id] int IDENTITY(1,1) NOT NULL,
     [nom] nvarchar(max)  NOT NULL,
     [cognom] nvarchar(max)  NOT NULL,
-    [dataIntroduccio] nvarchar(max)  NOT NULL,
-    [dataBaixa] nvarchar(max)  NOT NULL,
-    [dataModificacio] nvarchar(max)  NOT NULL
+    [dataModificacio] datetime  NOT NULL,
+    [dataIntroduccio] datetime  NOT NULL,
+    [dataBaixa] datetime  NULL
 );
 GO
 
 -- Creating table 'Prestec'
 CREATE TABLE [dbo].[Prestec] (
     [Id] int IDENTITY(1,1) NOT NULL,
-    [dataInici] datetime  NOT NULL,
-    [dataFi] datetime  NOT NULL,
-    [dataModificacio] nvarchar(max)  NOT NULL,
+    [dataModificacio] datetime  NOT NULL,
+    [dataIntroduccio] datetime  NOT NULL,
+    [dataBaixa] datetime  NULL,
     [Soci_Id] int  NOT NULL,
     [Copia_Id] int  NOT NULL
 );
@@ -120,9 +129,9 @@ CREATE TABLE [dbo].[Soci] (
     [Id] int IDENTITY(1,1) NOT NULL,
     [nom] nvarchar(max)  NOT NULL,
     [cognom] nvarchar(max)  NOT NULL,
-    [dataIntroduccio] nvarchar(max)  NOT NULL,
-    [dataBaixa] nvarchar(max)  NOT NULL,
-    [dataModificacio] nvarchar(max)  NOT NULL
+    [dataModificacio] datetime  NOT NULL,
+    [dataIntroduccio] datetime  NOT NULL,
+    [dataBaixa] datetime  NULL
 );
 GO
 
@@ -130,9 +139,9 @@ GO
 CREATE TABLE [dbo].[Sanció] (
     [Id] int IDENTITY(1,1) NOT NULL,
     [dataSancio] datetime  NOT NULL,
-    [dataAlta] nvarchar(max)  NOT NULL,
-    [dataBaixa] nvarchar(max)  NOT NULL,
-    [dataModificacio] nvarchar(max)  NOT NULL,
+    [dataModificacio] datetime  NOT NULL,
+    [dataIntroduccio] datetime  NOT NULL,
+    [dataBaixa] datetime  NULL,
     [Prestec_Id] int  NOT NULL
 );
 GO
@@ -141,10 +150,10 @@ GO
 CREATE TABLE [dbo].[LlistatEspera] (
     [Id] int IDENTITY(1,1) NOT NULL,
     [posicio] int  NOT NULL,
-    [dataIntroduccio] nvarchar(max)  NOT NULL,
-    [dataBaixa] nvarchar(max)  NOT NULL,
-    [dataModificacio] nvarchar(max)  NOT NULL,
-    [Llibre_ISBN] int  NOT NULL
+    [dataModificacio] datetime  NOT NULL,
+    [dataIntroduccio] datetime  NOT NULL,
+    [dataBaixa] datetime  NULL,
+    [Llibre_ISBN] nvarchar(20)  NOT NULL
 );
 GO
 
@@ -161,16 +170,16 @@ CREATE TABLE [dbo].[Autor] (
     [Id] int IDENTITY(1,1) NOT NULL,
     [nom] nvarchar(max)  NOT NULL,
     [cognom] nvarchar(max)  NOT NULL,
-    [dataIntroduccio] nvarchar(max)  NOT NULL,
-    [dataBaixa] nvarchar(max)  NOT NULL,
-    [dataModificacio] nvarchar(max)  NOT NULL
+    [dataModificacio] datetime  NOT NULL,
+    [dataIntroduccio] datetime  NOT NULL,
+    [dataBaixa] datetime  NULL
 );
 GO
 
 -- Creating table 'AutorLlibre'
 CREATE TABLE [dbo].[AutorLlibre] (
     [Autor_Id] int  NOT NULL,
-    [Llibre_ISBN] int  NOT NULL
+    [Llibre_ISBN] nvarchar(20)  NOT NULL
 );
 GO
 

@@ -49,25 +49,25 @@
     <Key>
       <PropertyRef Name="ISBN" />
     </Key>
-    <Property Name="ISBN" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ISBN" Type="nvarchar" StoreGeneratedPattern="Identity" Nullable="false" MaxLength="20" />
     <Property Name="titol" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="numPagines" Type="smallint" Nullable="false" />
+    <Property Name="numPagines" Type="int" Nullable="false" />
     <Property Name="disponible" Type="bit" Nullable="false" />
     <Property Name="genere" Type="nvarchar(max)" Nullable="false" />
     <Property Name="editorial" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="dataIntroduccio" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="dataBaixa" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="dataModificacio" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="dataIntroduccio" Type="datetime" Nullable="false" />
+    <Property Name="dataModificacio" Type="datetime" Nullable="false" />
+    <Property Name="dataBaixa" Type="datetime" Nullable="true" />
   </EntityType>
   <EntityType Name="Copia">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="dataModificacio" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="dataBaixa" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="dataIntroduccio" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Llibre_ISBN" Type="int" Nullable="false" />
+    <Property Name="dataModificacio" Type="datetime" Nullable="false" />
+    <Property Name="dataIntroduccio" Type="datetime" Nullable="false" />
+    <Property Name="dataBaixa" Type="datetime" Nullable="true" />
+    <Property Name="Llibre_ISBN" Type="nvarchar" MaxLength="20" Nullable="false" />
   </EntityType>
   <EntityType Name="Bilbiotecari">
     <Key>
@@ -76,18 +76,18 @@
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="nom" Type="nvarchar(max)" Nullable="false" />
     <Property Name="cognom" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="dataIntroduccio" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="dataBaixa" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="dataModificacio" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="dataModificacio" Type="datetime" Nullable="false" />
+    <Property Name="dataIntroduccio" Type="datetime" Nullable="false" />
+    <Property Name="dataBaixa" Type="datetime" Nullable="true" />
   </EntityType>
   <EntityType Name="Prestec">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="dataInici" Type="datetime" Nullable="false" />
-    <Property Name="dataFi" Type="datetime" Nullable="false" />
-    <Property Name="dataModificacio" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="dataModificacio" Type="datetime" Nullable="false" />
+    <Property Name="dataIntroduccio" Type="datetime" Nullable="false" />
+    <Property Name="dataBaixa" Type="datetime" Nullable="true" />
     <Property Name="Soci_Id" Type="int" Nullable="false" />
     <Property Name="Copia_Id" Type="int" Nullable="false" />
   </EntityType>
@@ -98,9 +98,9 @@
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="nom" Type="nvarchar(max)" Nullable="false" />
     <Property Name="cognom" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="dataIntroduccio" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="dataBaixa" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="dataModificacio" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="dataModificacio" Type="datetime" Nullable="false" />
+    <Property Name="dataIntroduccio" Type="datetime" Nullable="false" />
+    <Property Name="dataBaixa" Type="datetime" Nullable="true" />
   </EntityType>
   <EntityType Name="Sanció">
     <Key>
@@ -108,9 +108,9 @@
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="dataSancio" Type="datetime" Nullable="false" />
-    <Property Name="dataAlta" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="dataBaixa" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="dataModificacio" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="dataModificacio" Type="datetime" Nullable="false" />
+    <Property Name="dataIntroduccio" Type="datetime" Nullable="false" />
+    <Property Name="dataBaixa" Type="datetime" Nullable="true" />
     <Property Name="Prestec_Id" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="LlistatEspera">
@@ -119,10 +119,10 @@
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="posicio" Type="int" Nullable="false" />
-    <Property Name="dataIntroduccio" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="dataBaixa" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="dataModificacio" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Llibre_ISBN" Type="int" Nullable="false" />
+    <Property Name="dataModificacio" Type="datetime" Nullable="false" />
+    <Property Name="dataIntroduccio" Type="datetime" Nullable="false" />
+    <Property Name="dataBaixa" Type="datetime" Nullable="true" />
+    <Property Name="Llibre_ISBN" Type="nvarchar" MaxLength="20" Nullable="false" />
   </EntityType>
   <EntityType Name="DiesNoHabils">
     <Key>
@@ -139,9 +139,9 @@
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="nom" Type="nvarchar(max)" Nullable="false" />
     <Property Name="cognom" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="dataIntroduccio" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="dataBaixa" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="dataModificacio" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="dataModificacio" Type="datetime" Nullable="false" />
+    <Property Name="dataIntroduccio" Type="datetime" Nullable="false" />
+    <Property Name="dataBaixa" Type="datetime" Nullable="true" />
   </EntityType>
   <EntityType Name="AutorLlibre">
     <Key>
@@ -149,7 +149,7 @@
       <PropertyRef Name="Llibre_ISBN" />
     </Key>
     <Property Name="Autor_Id" Type="int" Nullable="false" />
-    <Property Name="Llibre_ISBN" Type="int" Nullable="false" />
+    <Property Name="Llibre_ISBN" Type="nvarchar" Nullable="false" MaxLength="20" />
   </EntityType>
   <Association Name="SociPrestec">
     <End Role="Soci" Type="Model1.Store.Soci" Multiplicity="1" />
@@ -278,29 +278,29 @@
           <Key>
             <PropertyRef Name="ISBN" />
           </Key>
-          <Property Name="ISBN" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ISBN" Type="String" Nullable="false" annotation:StoreGeneratedPattern="Identity" MaxLength="20" />
           <Property Name="titol" Type="String" Nullable="false" />
-          <Property Name="numPagines" Type="Int16" Nullable="false" />
+          <Property Name="numPagines" Type="Int32" Nullable="false" />
           <Property Name="disponible" Type="Boolean" Nullable="false" />
           <Property Name="genere" Type="String" Nullable="false" />
           <Property Name="editorial" Type="String" Nullable="false" />
           <NavigationProperty Name="Copia" Relationship="Model1.LlibreCopia" FromRole="Llibre" ToRole="Copia" />
           <NavigationProperty Name="LlistatEspera" Relationship="Model1.LlibreLlistatEspera" FromRole="Llibre" ToRole="LlistatEspera" />
           <NavigationProperty Name="Autor" Relationship="Model1.AutorLlibre" FromRole="Llibre" ToRole="Autor" />
-          <Property Name="dataIntroduccio" Type="String" Nullable="false" />
-          <Property Name="dataBaixa" Type="String" Nullable="false" />
-          <Property Name="dataModificacio" Type="String" Nullable="false" />
+          <Property Name="dataIntroduccio" Type="DateTime" Nullable="false" />
+          <Property Name="dataModificacio" Type="DateTime" Nullable="false" />
+          <Property Name="dataBaixa" Type="DateTime" Nullable="true" />
         </EntityType>
         <EntityType Name="Copia">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="dataModificacio" Type="String" Nullable="false" />
-          <Property Name="dataBaixa" Type="String" Nullable="false" />
-          <Property Name="dataIntroduccio" Type="String" Nullable="false" />
           <NavigationProperty Name="Prestec" Relationship="Model1.CopiaPrestec" FromRole="Copia" ToRole="Prestec" />
           <NavigationProperty Name="Llibre" Relationship="Model1.LlibreCopia" FromRole="Copia" ToRole="Llibre" />
+          <Property Name="dataModificacio" Type="DateTime" Nullable="false" />
+          <Property Name="dataIntroduccio" Type="DateTime" Nullable="false" />
+          <Property Name="dataBaixa" Type="DateTime" Nullable="true" />
         </EntityType>
         <EntityType Name="Bilbiotecari">
           <Key>
@@ -309,21 +309,21 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="nom" Type="String" Nullable="false" />
           <Property Name="cognom" Type="String" Nullable="false" />
-          <Property Name="dataIntroduccio" Type="String" Nullable="false" />
-          <Property Name="dataBaixa" Type="String" Nullable="false" />
-          <Property Name="dataModificacio" Type="String" Nullable="false" />
+          <Property Name="dataModificacio" Type="DateTime" Nullable="false" />
+          <Property Name="dataIntroduccio" Type="DateTime" Nullable="false" />
+          <Property Name="dataBaixa" Type="DateTime" Nullable="true" />
         </EntityType>
         <EntityType Name="Prestec">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="dataInici" Type="DateTime" Nullable="false" />
-          <Property Name="dataFi" Type="DateTime" Nullable="false" />
           <NavigationProperty Name="Soci" Relationship="Model1.SociPrestec" FromRole="Prestec" ToRole="Soci" />
-          <Property Name="dataModificacio" Type="String" Nullable="false" />
           <NavigationProperty Name="Copia" Relationship="Model1.CopiaPrestec" FromRole="Prestec" ToRole="Copia" />
           <NavigationProperty Name="Sanció" Relationship="Model1.PrestecSanció" FromRole="Prestec" ToRole="Sanció" />
+          <Property Name="dataModificacio" Type="DateTime" Nullable="false" />
+          <Property Name="dataIntroduccio" Type="DateTime" Nullable="false" />
+          <Property Name="dataBaixa" Type="DateTime" Nullable="true" />
         </EntityType>
         <EntityType Name="Soci">
           <Key>
@@ -333,9 +333,9 @@
           <Property Name="nom" Type="String" Nullable="false" />
           <Property Name="cognom" Type="String" Nullable="false" />
           <NavigationProperty Name="Prestec" Relationship="Model1.SociPrestec" FromRole="Soci" ToRole="Prestec" />
-          <Property Name="dataIntroduccio" Type="String" Nullable="false" />
-          <Property Name="dataBaixa" Type="String" Nullable="false" />
-          <Property Name="dataModificacio" Type="String" Nullable="false" />
+          <Property Name="dataModificacio" Type="DateTime" Nullable="false" />
+          <Property Name="dataIntroduccio" Type="DateTime" Nullable="false" />
+          <Property Name="dataBaixa" Type="DateTime" Nullable="true" />
         </EntityType>
         <EntityType Name="Sanció">
           <Key>
@@ -344,9 +344,9 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="dataSancio" Type="DateTime" Nullable="false" />
           <NavigationProperty Name="Prestec" Relationship="Model1.PrestecSanció" FromRole="Sanció" ToRole="Prestec" />
-          <Property Name="dataAlta" Type="String" Nullable="false" />
-          <Property Name="dataBaixa" Type="String" Nullable="false" />
-          <Property Name="dataModificacio" Type="String" Nullable="false" />
+          <Property Name="dataModificacio" Type="DateTime" Nullable="false" />
+          <Property Name="dataIntroduccio" Type="DateTime" Nullable="false" />
+          <Property Name="dataBaixa" Type="DateTime" Nullable="true" />
         </EntityType>
         <EntityType Name="LlistatEspera">
           <Key>
@@ -355,10 +355,10 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="posicio" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Llibre" Relationship="Model1.LlibreLlistatEspera" FromRole="LlistatEspera" ToRole="Llibre" />
-          <Property Name="dataIntroduccio" Type="String" Nullable="false" />
-          <Property Name="dataBaixa" Type="String" Nullable="false" />
-          <Property Name="dataModificacio" Type="String" Nullable="false" />
-        </EntityType>
+          <Property Name="dataModificacio" Type="DateTime" Nullable="false" />
+          <Property Name="dataIntroduccio" Type="DateTime" Nullable="false" />
+          <Property Name="dataBaixa" Type="DateTime" Nullable="true" />
+          </EntityType>
         <EntityType Name="DiesNoHabils">
           <Key>
             <PropertyRef Name="Id" />
@@ -375,9 +375,9 @@
           <Property Name="nom" Type="String" Nullable="false" />
           <Property Name="cognom" Type="String" Nullable="false" />
           <NavigationProperty Name="Llibre" Relationship="Model1.AutorLlibre" FromRole="Autor" ToRole="Llibre" />
-          <Property Name="dataIntroduccio" Type="String" Nullable="false" />
-          <Property Name="dataBaixa" Type="String" Nullable="false" />
-          <Property Name="dataModificacio" Type="String" Nullable="false" />
+          <Property Name="dataModificacio" Nullable="false" Type="DateTime" />
+          <Property Name="dataIntroduccio" Type="DateTime" Nullable="false" />
+          <Property Name="dataBaixa" Type="DateTime" Nullable="true" />
         </EntityType>
         <Association Name="SociPrestec">
           <End Type="Model1.Soci" Role="Soci" Multiplicity="1" />
@@ -419,8 +419,8 @@
           <ScalarProperty Name="genere" ColumnName="genere" />
           <ScalarProperty Name="editorial" ColumnName="editorial" />
           <ScalarProperty Name="dataIntroduccio" ColumnName="dataIntroduccio" />
-          <ScalarProperty Name="dataBaixa" ColumnName="dataBaixa" />
           <ScalarProperty Name="dataModificacio" ColumnName="dataModificacio" />
+          <ScalarProperty Name="dataBaixa" ColumnName="dataBaixa" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -429,8 +429,8 @@
         <MappingFragment StoreEntitySet="Copia">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="dataModificacio" ColumnName="dataModificacio" />
-          <ScalarProperty Name="dataBaixa" ColumnName="dataBaixa" />
           <ScalarProperty Name="dataIntroduccio" ColumnName="dataIntroduccio" />
+          <ScalarProperty Name="dataBaixa" ColumnName="dataBaixa" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -440,9 +440,9 @@
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="nom" ColumnName="nom" />
           <ScalarProperty Name="cognom" ColumnName="cognom" />
+          <ScalarProperty Name="dataModificacio" ColumnName="dataModificacio" />
           <ScalarProperty Name="dataIntroduccio" ColumnName="dataIntroduccio" />
           <ScalarProperty Name="dataBaixa" ColumnName="dataBaixa" />
-          <ScalarProperty Name="dataModificacio" ColumnName="dataModificacio" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -450,9 +450,9 @@
       <EntityTypeMapping TypeName="IsTypeOf(Model1.Prestec)">
         <MappingFragment StoreEntitySet="Prestec">
           <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="dataInici" ColumnName="dataInici" />
-          <ScalarProperty Name="dataFi" ColumnName="dataFi" />
           <ScalarProperty Name="dataModificacio" ColumnName="dataModificacio" />
+          <ScalarProperty Name="dataIntroduccio" ColumnName="dataIntroduccio" />
+          <ScalarProperty Name="dataBaixa" ColumnName="dataBaixa" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -462,9 +462,9 @@
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="nom" ColumnName="nom" />
           <ScalarProperty Name="cognom" ColumnName="cognom" />
+          <ScalarProperty Name="dataModificacio" ColumnName="dataModificacio" />
           <ScalarProperty Name="dataIntroduccio" ColumnName="dataIntroduccio" />
           <ScalarProperty Name="dataBaixa" ColumnName="dataBaixa" />
-          <ScalarProperty Name="dataModificacio" ColumnName="dataModificacio" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -473,9 +473,9 @@
         <MappingFragment StoreEntitySet="Sanció">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="dataSancio" ColumnName="dataSancio" />
-          <ScalarProperty Name="dataAlta" ColumnName="dataAlta" />
-          <ScalarProperty Name="dataBaixa" ColumnName="dataBaixa" />
           <ScalarProperty Name="dataModificacio" ColumnName="dataModificacio" />
+          <ScalarProperty Name="dataIntroduccio" ColumnName="dataIntroduccio" />
+          <ScalarProperty Name="dataBaixa" ColumnName="dataBaixa" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -484,9 +484,9 @@
         <MappingFragment StoreEntitySet="LlistatEspera">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="posicio" ColumnName="posicio" />
+          <ScalarProperty Name="dataModificacio" ColumnName="dataModificacio" />
           <ScalarProperty Name="dataIntroduccio" ColumnName="dataIntroduccio" />
           <ScalarProperty Name="dataBaixa" ColumnName="dataBaixa" />
-          <ScalarProperty Name="dataModificacio" ColumnName="dataModificacio" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -505,9 +505,9 @@
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="nom" ColumnName="nom" />
           <ScalarProperty Name="cognom" ColumnName="cognom" />
+          <ScalarProperty Name="dataModificacio" ColumnName="dataModificacio" />
           <ScalarProperty Name="dataIntroduccio" ColumnName="dataIntroduccio" />
           <ScalarProperty Name="dataBaixa" ColumnName="dataBaixa" />
-          <ScalarProperty Name="dataModificacio" ColumnName="dataModificacio" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
