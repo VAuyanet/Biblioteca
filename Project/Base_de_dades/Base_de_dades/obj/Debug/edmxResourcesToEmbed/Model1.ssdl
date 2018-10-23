@@ -1,0 +1,216 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Model1.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="Model1StoreContainer">
+    <EntitySet Name="LlibreSet" EntityType="Model1.Store.LlibreSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="CopiaSet" EntityType="Model1.Store.CopiaSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="BilbiotecariSet" EntityType="Model1.Store.BilbiotecariSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PrestecSet" EntityType="Model1.Store.PrestecSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="SociSet" EntityType="Model1.Store.SociSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="SancióSet" EntityType="Model1.Store.SancióSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="LlistatEsperaSet" EntityType="Model1.Store.LlistatEsperaSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="DiesNoHabilsSet" EntityType="Model1.Store.DiesNoHabilsSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="AutorSet" EntityType="Model1.Store.AutorSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="AutorLlibre" EntityType="Model1.Store.AutorLlibre" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="SociPrestec" Association="Model1.Store.SociPrestec">
+      <End Role="Soci" EntitySet="SociSet" />
+      <End Role="Prestec" EntitySet="PrestecSet" />
+    </AssociationSet>
+    <AssociationSet Name="CopiaPrestec" Association="Model1.Store.CopiaPrestec">
+      <End Role="Copia" EntitySet="CopiaSet" />
+      <End Role="Prestec" EntitySet="PrestecSet" />
+    </AssociationSet>
+    <AssociationSet Name="SancióPrestec" Association="Model1.Store.SancióPrestec">
+      <End Role="Sanció" EntitySet="SancióSet" />
+      <End Role="Prestec" EntitySet="PrestecSet" />
+    </AssociationSet>
+    <AssociationSet Name="LlibreCopia" Association="Model1.Store.LlibreCopia">
+      <End Role="Llibre" EntitySet="LlibreSet" />
+      <End Role="Copia" EntitySet="CopiaSet" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AutorLlibre_Autor" Association="Model1.Store.FK_AutorLlibre_Autor">
+      <End Role="Autor" EntitySet="AutorSet" />
+      <End Role="AutorLlibre" EntitySet="AutorLlibre" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AutorLlibre_Llibre" Association="Model1.Store.FK_AutorLlibre_Llibre">
+      <End Role="Llibre" EntitySet="LlibreSet" />
+      <End Role="AutorLlibre" EntitySet="AutorLlibre" />
+    </AssociationSet>
+    <AssociationSet Name="LlibreLlistatEspera" Association="Model1.Store.LlibreLlistatEspera">
+      <End Role="Llibre" EntitySet="LlibreSet" />
+      <End Role="LlistatEspera" EntitySet="LlistatEsperaSet" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="LlibreSet">
+    <Key>
+      <PropertyRef Name="ISBN" />
+    </Key>
+    <Property Name="ISBN" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="titol" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="numPagines" Type="smallint" Nullable="false" />
+    <Property Name="disponible" Type="bit" Nullable="false" />
+    <Property Name="genere" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="editorial" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="LlistatEspera_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CopiaSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ISBN" Type="int" Nullable="false" />
+    <Property Name="Prestec_Id" Type="int" Nullable="false" />
+    <Property Name="Llibre_ISBN" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="BilbiotecariSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nom" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="cognom" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PrestecSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdCopia" Type="int" Nullable="false" />
+    <Property Name="dataInici" Type="datetime" Nullable="false" />
+    <Property Name="dataFi" Type="datetime" Nullable="false" />
+    <Property Name="IdSoci" Type="int" Nullable="false" />
+    <Property Name="Soci_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="SociSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nom" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="cognom" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="SancióSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="dataSancio" Type="datetime" Nullable="false" />
+    <Property Name="IdPrestec" Type="int" Nullable="false" />
+    <Property Name="Prestec_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="LlistatEsperaSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="posicio" Type="int" Nullable="false" />
+    <Property Name="IdLlibre" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="DiesNoHabilsSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="data" Type="datetime" Nullable="false" />
+    <Property Name="motiu" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AutorSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nom" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="cognom" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AutorLlibre">
+    <Key>
+      <PropertyRef Name="Autor_Id" />
+      <PropertyRef Name="Llibre_ISBN" />
+    </Key>
+    <Property Name="Autor_Id" Type="int" Nullable="false" />
+    <Property Name="Llibre_ISBN" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="SociPrestec">
+    <End Role="Soci" Type="Model1.Store.SociSet" Multiplicity="1" />
+    <End Role="Prestec" Type="Model1.Store.PrestecSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Soci">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Prestec">
+        <PropertyRef Name="Soci_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="CopiaPrestec">
+    <End Role="Copia" Type="Model1.Store.CopiaSet" Multiplicity="*" />
+    <End Role="Prestec" Type="Model1.Store.PrestecSet" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Prestec">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Copia">
+        <PropertyRef Name="Prestec_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="SancióPrestec">
+    <End Role="Sanció" Type="Model1.Store.SancióSet" Multiplicity="*" />
+    <End Role="Prestec" Type="Model1.Store.PrestecSet" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Prestec">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Sanció">
+        <PropertyRef Name="Prestec_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="LlibreCopia">
+    <End Role="Llibre" Type="Model1.Store.LlibreSet" Multiplicity="1" />
+    <End Role="Copia" Type="Model1.Store.CopiaSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Llibre">
+        <PropertyRef Name="ISBN" />
+      </Principal>
+      <Dependent Role="Copia">
+        <PropertyRef Name="Llibre_ISBN" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="LlibreLlistatEspera">
+    <End Role="Llibre" Type="Model1.Store.LlibreSet" Multiplicity="*" />
+    <End Role="LlistatEspera" Type="Model1.Store.LlistatEsperaSet" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="LlistatEspera">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Llibre">
+        <PropertyRef Name="LlistatEspera_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AutorLlibre_Autor">
+    <End Role="Autor" Type="Model1.Store.AutorSet" Multiplicity="1" />
+    <End Role="AutorLlibre" Type="Model1.Store.AutorLlibre" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Autor">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AutorLlibre">
+        <PropertyRef Name="Autor_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AutorLlibre_Llibre">
+    <End Role="AutorLlibre" Type="Model1.Store.AutorLlibre" Multiplicity="*" />
+    <End Role="Llibre" Type="Model1.Store.LlibreSet" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Llibre">
+        <PropertyRef Name="ISBN" />
+      </Principal>
+      <Dependent Role="AutorLlibre">
+        <PropertyRef Name="Llibre_ISBN" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

@@ -1,0 +1,150 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="Model1" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+  <EntityContainer Name="Model1Container" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="LlibreSet" EntityType="Model1.Llibre" />
+    <EntitySet Name="CopiaSet" EntityType="Model1.Copia" />
+    <EntitySet Name="BilbiotecariSet" EntityType="Model1.Bilbiotecari" />
+    <EntitySet Name="PrestecSet" EntityType="Model1.Prestec" />
+    <EntitySet Name="SociSet" EntityType="Model1.Soci" />
+    <EntitySet Name="SancióSet" EntityType="Model1.Sanció" />
+    <EntitySet Name="LlistatEsperaSet" EntityType="Model1.LlistatEspera" />
+    <EntitySet Name="DiesNoHabilsSet" EntityType="Model1.DiesNoHabils" />
+    <EntitySet Name="AutorSet" EntityType="Model1.Autor" />
+    <AssociationSet Name="SociPrestec" Association="Model1.SociPrestec">
+      <End Role="Soci" EntitySet="SociSet" />
+      <End Role="Prestec" EntitySet="PrestecSet" />
+    </AssociationSet>
+    <AssociationSet Name="CopiaPrestec" Association="Model1.CopiaPrestec">
+      <End Role="Copia" EntitySet="CopiaSet" />
+      <End Role="Prestec" EntitySet="PrestecSet" />
+    </AssociationSet>
+    <AssociationSet Name="SancióPrestec" Association="Model1.SancióPrestec">
+      <End Role="Sanció" EntitySet="SancióSet" />
+      <End Role="Prestec" EntitySet="PrestecSet" />
+    </AssociationSet>
+    <AssociationSet Name="LlibreCopia" Association="Model1.LlibreCopia">
+      <End Role="Llibre" EntitySet="LlibreSet" />
+      <End Role="Copia" EntitySet="CopiaSet" />
+    </AssociationSet>
+    <AssociationSet Name="AutorLlibre" Association="Model1.AutorLlibre">
+      <End Role="Autor" EntitySet="AutorSet" />
+      <End Role="Llibre" EntitySet="LlibreSet" />
+    </AssociationSet>
+    <AssociationSet Name="LlibreLlistatEspera" Association="Model1.LlibreLlistatEspera">
+      <End Role="Llibre" EntitySet="LlibreSet" />
+      <End Role="LlistatEspera" EntitySet="LlistatEsperaSet" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Llibre">
+    <Key>
+      <PropertyRef Name="ISBN" />
+    </Key>
+    <Property Name="ISBN" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="titol" Type="String" Nullable="false" />
+    <Property Name="numPagines" Type="Int16" Nullable="false" />
+    <Property Name="disponible" Type="Boolean" Nullable="false" />
+    <Property Name="genere" Type="String" Nullable="false" />
+    <Property Name="editorial" Type="String" Nullable="false" />
+    <NavigationProperty Name="Copia" Relationship="Model1.LlibreCopia" FromRole="Llibre" ToRole="Copia" />
+    <NavigationProperty Name="Autor" Relationship="Model1.AutorLlibre" FromRole="Llibre" ToRole="Autor" />
+    <NavigationProperty Name="LlistatEspera" Relationship="Model1.LlibreLlistatEspera" FromRole="Llibre" ToRole="LlistatEspera" />
+  </EntityType>
+  <EntityType Name="Copia">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ISBN" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Prestec" Relationship="Model1.CopiaPrestec" FromRole="Copia" ToRole="Prestec" />
+    <NavigationProperty Name="Llibre" Relationship="Model1.LlibreCopia" FromRole="Copia" ToRole="Llibre" />
+  </EntityType>
+  <EntityType Name="Bilbiotecari">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nom" Type="String" Nullable="false" />
+    <Property Name="cognom" Type="String" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Prestec">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdCopia" Type="Int32" Nullable="false" />
+    <Property Name="dataInici" Type="DateTime" Nullable="false" />
+    <Property Name="dataFi" Type="DateTime" Nullable="false" />
+    <Property Name="IdSoci" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Soci" Relationship="Model1.SociPrestec" FromRole="Prestec" ToRole="Soci" />
+    <NavigationProperty Name="Copia" Relationship="Model1.CopiaPrestec" FromRole="Prestec" ToRole="Copia" />
+    <NavigationProperty Name="Sanció" Relationship="Model1.SancióPrestec" FromRole="Prestec" ToRole="Sanció" />
+  </EntityType>
+  <EntityType Name="Soci">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nom" Type="String" Nullable="false" />
+    <Property Name="cognom" Type="String" Nullable="false" />
+    <NavigationProperty Name="Prestec" Relationship="Model1.SociPrestec" FromRole="Soci" ToRole="Prestec" />
+  </EntityType>
+  <EntityType Name="Sanció">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="dataSancio" Type="DateTime" Nullable="false" />
+    <Property Name="IdPrestec" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Prestec" Relationship="Model1.SancióPrestec" FromRole="Sanció" ToRole="Prestec" />
+  </EntityType>
+  <EntityType Name="LlistatEspera">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="posicio" Type="Int32" Nullable="false" />
+    <Property Name="IdLlibre" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Llibre" Relationship="Model1.LlibreLlistatEspera" FromRole="LlistatEspera" ToRole="Llibre" />
+  </EntityType>
+  <EntityType Name="DiesNoHabils">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="data" Type="DateTime" Nullable="false" />
+    <Property Name="motiu" Type="String" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Autor">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nom" Type="String" Nullable="false" />
+    <Property Name="cognom" Type="String" Nullable="false" />
+    <NavigationProperty Name="Llibre" Relationship="Model1.AutorLlibre" FromRole="Autor" ToRole="Llibre" />
+  </EntityType>
+  <Association Name="SociPrestec">
+    <End Type="Model1.Soci" Role="Soci" Multiplicity="1" />
+    <End Type="Model1.Prestec" Role="Prestec" Multiplicity="*" />
+  </Association>
+  <Association Name="CopiaPrestec">
+    <End Type="Model1.Copia" Role="Copia" Multiplicity="1" />
+    <End Type="Model1.Prestec" Role="Prestec" Multiplicity="1" />
+  </Association>
+  <Association Name="SancióPrestec">
+    <End Type="Model1.Sanció" Role="Sanció" Multiplicity="1" />
+    <End Type="Model1.Prestec" Role="Prestec" Multiplicity="1" />
+  </Association>
+  <Association Name="LlibreCopia">
+    <End Type="Model1.Llibre" Role="Llibre" Multiplicity="1" />
+    <End Type="Model1.Copia" Role="Copia" Multiplicity="*" />
+  </Association>
+  <Association Name="AutorLlibre">
+    <End Type="Model1.Autor" Role="Autor" Multiplicity="*" />
+    <End Type="Model1.Llibre" Role="Llibre" Multiplicity="*" />
+  </Association>
+  <Association Name="LlibreLlistatEspera">
+    <End Type="Model1.Llibre" Role="Llibre" Multiplicity="*" />
+    <End Type="Model1.LlistatEspera" Role="LlistatEspera" Multiplicity="1" />
+  </Association>
+</Schema>

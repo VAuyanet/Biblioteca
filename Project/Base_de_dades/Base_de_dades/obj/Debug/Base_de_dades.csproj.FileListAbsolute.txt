@@ -1,0 +1,4 @@
+C:\Users\VAuyanet\Desktop\Base_de_dades\Base_de_dades\obj\Debug\Base_de_dades.csprojAssemblyReference.cache
+C:\Users\VAuyanet\Desktop\Base_de_dades\Base_de_dades\obj\Debug\Base_de_dades.Properties.Resources.resources
+C:\Users\VAuyanet\Desktop\Base_de_dades\Base_de_dades\obj\Debug\Base_de_dades.csproj.GenerateResource.cache
+C:\Users\VAuyanet\Desktop\Base_de_dades\Base_de_dades\obj\Debug\Base_de_dades.csproj.CoreCompileInputs.cache

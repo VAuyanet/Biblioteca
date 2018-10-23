@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="ba1f83cae338479d8a323831eb99f499" Name="Diagram1" ZoomLevel="73" >
+        <EntityTypeShape EntityType="Model1.Llibre" Width="1.5" PointX="6.375" PointY="3.5" />
+        <EntityTypeShape EntityType="Model1.Copia" Width="1.5" PointX="8.625" PointY="4.5" />
+        <EntityTypeShape EntityType="Model1.Bilbiotecari" Width="1.5" PointX="4" PointY="1.375" />
+        <EntityTypeShape EntityType="Model1.Prestec" Width="1.5" PointX="11.375" PointY="3.625" />
+        <EntityTypeShape EntityType="Model1.Soci" Width="1.5" PointX="11.375" PointY="0.5" />
+        <EntityTypeShape EntityType="Model1.Sanció" Width="1.5" PointX="11.375" PointY="7.125" />
+        <EntityTypeShape EntityType="Model1.LlistatEspera" Width="1.5" PointX="6.125" PointY="7.625" />
+        <EntityTypeShape EntityType="Model1.DiesNoHabils" Width="1.5" PointX="7.625" PointY="1.375" />
+        <EntityTypeShape EntityType="Model1.Autor" Width="1.5" PointX="3.625" PointY="4.5" />
+        <AssociationConnector Association="Model1.SociPrestec" />
+        <AssociationConnector Association="Model1.CopiaPrestec" />
+        <AssociationConnector Association="Model1.LlibreCopia" />
+        <AssociationConnector Association="Model1.LlibreLlistatEspera" />
+        <AssociationConnector Association="Model1.AutorLlibre" />
+        <AssociationConnector Association="Model1.PrestecSanció" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

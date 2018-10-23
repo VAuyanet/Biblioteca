@@ -1,0 +1,138 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Model1StoreContainer" CdmEntityContainer="Model1Container">
+    <EntitySetMapping Name="LlibreSet">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.Llibre)">
+        <MappingFragment StoreEntitySet="LlibreSet">
+          <ScalarProperty Name="ISBN" ColumnName="ISBN" />
+          <ScalarProperty Name="titol" ColumnName="titol" />
+          <ScalarProperty Name="numPagines" ColumnName="numPagines" />
+          <ScalarProperty Name="disponible" ColumnName="disponible" />
+          <ScalarProperty Name="genere" ColumnName="genere" />
+          <ScalarProperty Name="editorial" ColumnName="editorial" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CopiaSet">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.Copia)">
+        <MappingFragment StoreEntitySet="CopiaSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="ISBN" ColumnName="ISBN" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BilbiotecariSet">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.Bilbiotecari)">
+        <MappingFragment StoreEntitySet="BilbiotecariSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="nom" ColumnName="nom" />
+          <ScalarProperty Name="cognom" ColumnName="cognom" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PrestecSet">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.Prestec)">
+        <MappingFragment StoreEntitySet="PrestecSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="IdCopia" ColumnName="IdCopia" />
+          <ScalarProperty Name="dataInici" ColumnName="dataInici" />
+          <ScalarProperty Name="dataFi" ColumnName="dataFi" />
+          <ScalarProperty Name="IdSoci" ColumnName="IdSoci" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SociSet">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.Soci)">
+        <MappingFragment StoreEntitySet="SociSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="nom" ColumnName="nom" />
+          <ScalarProperty Name="cognom" ColumnName="cognom" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SancióSet">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.Sanció)">
+        <MappingFragment StoreEntitySet="SancióSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="dataSancio" ColumnName="dataSancio" />
+          <ScalarProperty Name="IdPrestec" ColumnName="IdPrestec" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LlistatEsperaSet">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.LlistatEspera)">
+        <MappingFragment StoreEntitySet="LlistatEsperaSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="posicio" ColumnName="posicio" />
+          <ScalarProperty Name="IdLlibre" ColumnName="IdLlibre" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DiesNoHabilsSet">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.DiesNoHabils)">
+        <MappingFragment StoreEntitySet="DiesNoHabilsSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="data" ColumnName="data" />
+          <ScalarProperty Name="motiu" ColumnName="motiu" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AutorSet">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.Autor)">
+        <MappingFragment StoreEntitySet="AutorSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="nom" ColumnName="nom" />
+          <ScalarProperty Name="cognom" ColumnName="cognom" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="SociPrestec" TypeName="Model1.SociPrestec" StoreEntitySet="PrestecSet">
+      <EndProperty Name="Soci">
+        <ScalarProperty Name="Id" ColumnName="Soci_Id" />
+      </EndProperty>
+      <EndProperty Name="Prestec">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="CopiaPrestec" TypeName="Model1.CopiaPrestec" StoreEntitySet="CopiaSet">
+      <EndProperty Name="Prestec">
+        <ScalarProperty Name="Id" ColumnName="Prestec_Id" />
+      </EndProperty>
+      <EndProperty Name="Copia">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="SancióPrestec" TypeName="Model1.SancióPrestec" StoreEntitySet="SancióSet">
+      <EndProperty Name="Prestec">
+        <ScalarProperty Name="Id" ColumnName="Prestec_Id" />
+      </EndProperty>
+      <EndProperty Name="Sanció">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="LlibreCopia" TypeName="Model1.LlibreCopia" StoreEntitySet="CopiaSet">
+      <EndProperty Name="Llibre">
+        <ScalarProperty Name="ISBN" ColumnName="Llibre_ISBN" />
+      </EndProperty>
+      <EndProperty Name="Copia">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="AutorLlibre" TypeName="Model1.AutorLlibre" StoreEntitySet="AutorLlibre">
+      <EndProperty Name="Autor">
+        <ScalarProperty Name="Id" ColumnName="Autor_Id" />
+      </EndProperty>
+      <EndProperty Name="Llibre">
+        <ScalarProperty Name="ISBN" ColumnName="Llibre_ISBN" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="LlibreLlistatEspera" TypeName="Model1.LlibreLlistatEspera" StoreEntitySet="LlibreSet">
+      <EndProperty Name="LlistatEspera">
+        <ScalarProperty Name="Id" ColumnName="LlistatEspera_Id" />
+      </EndProperty>
+      <EndProperty Name="Llibre">
+        <ScalarProperty Name="ISBN" ColumnName="ISBN" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping>
