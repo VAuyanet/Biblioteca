@@ -94,6 +94,7 @@
     <Compile Include="Soci.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="SociDTO.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.Config" />
